@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DirTree.Models
 {
-    public class DirectoryNode
+    public class DirectoryNode : IComparable<DirectoryNode>
     {
         public string Name => info.Name;
         public long Size
@@ -39,12 +36,17 @@ namespace DirTree.Models
 
         public IEnumerable<DirectoryNode> Children => children;
 
+        public void SortChildren()
+        {
+            children.Sort((x, y) => y.CompareTo(x));
+        }
+
         public long CalculateSize()
         {
             long runningSize = 0;
 
             runningSize += info.GetSizeOfFiles();
-            foreach(var child in children)
+            foreach (var child in children)
             {
                 runningSize += child.Size;
             }
@@ -53,6 +55,15 @@ namespace DirTree.Models
             valid = true;
 
             return size;
+        }
+
+        public int CompareTo(DirectoryNode? other)
+        {
+            if (this == other) return 0;
+
+            if (other == null) return -1;
+
+            return this.Size.CompareTo(other.Size);
         }
 
         private readonly List<DirectoryNode> children;

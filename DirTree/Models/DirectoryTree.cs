@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace DirTree.Models
 {
@@ -30,9 +27,10 @@ namespace DirTree.Models
                     }
                     catch (UnauthorizedAccessException)
                     {
-                        
+
                     }
                 }
+                node.SortChildren();
             }
 
             BuildTree(root, rootDirectory);

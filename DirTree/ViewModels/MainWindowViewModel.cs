@@ -2,10 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Threading;
 using DirTree.Models;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DirTree.ViewModels
@@ -78,7 +75,7 @@ namespace DirTree.ViewModels
         {
             RootCollection = new();
             browseButtonEnabled = true;
-            message = "";
+            message = "Ready.";
         }
 
         public void HandleBrowseButton(Window parent)
